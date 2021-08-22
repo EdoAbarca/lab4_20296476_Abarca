@@ -47,12 +47,14 @@ public class SeleccionPost extends javax.swing.JFrame
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(254, 249, 231));
+        jPanel1.setForeground(new java.awt.Color(133, 193, 233));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
         jPanel1.setRequestFocusEnabled(false);
 
@@ -72,124 +74,167 @@ public class SeleccionPost extends javax.swing.JFrame
 
         jButton1.setText("Volver");
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel1.setText("Informacion post seleccionado");
+        jLabel1.setRequestFocusEnabled(false);
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel2.setText("ID:");
+        jLabel2.setRequestFocusEnabled(false);
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel3.setText("ID");
+        jLabel3.setRequestFocusEnabled(false);
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel4.setText("ID original:");
+        jLabel4.setRequestFocusEnabled(false);
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel5.setText("IDOR");
+        jLabel5.setRequestFocusEnabled(false);
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel6.setText("Tipo de publicacion:");
+        jLabel6.setRequestFocusEnabled(false);
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel7.setText("Tipo");
+        jLabel7.setRequestFocusEnabled(false);
 
-        jLabel8.setText("jLabel8");
+        jLabel8.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel8.setText("Fecha creacion:");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setRequestFocusEnabled(false);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jLabel9.setText("jLabel9");
+        jLabel9.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel9.setText("dd/mm/yyyy");
+        jLabel9.setRequestFocusEnabled(false);
 
-        jLabel10.setText("jLabel10");
+        jLabel10.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel10.setText("Autor: ");
+        jLabel10.setRequestFocusEnabled(false);
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel11.setText("Usuario");
+        jLabel11.setRequestFocusEnabled(false);
 
-        jLabel12.setText("jLabel12");
+        jLabel12.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel12.setText("Contenido publicacion:");
+        jLabel12.setRequestFocusEnabled(false);
 
-        jLabel13.setText("jLabel13");
-
-        jLabel14.setText("jLabel14");
+        jLabel13.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel13.setText("Destinado a:");
+        jLabel13.setRequestFocusEnabled(false);
 
         jButton2.setText("Compartir post");
+
+        jTextField1.setText("jTextField1");
+
+        jLabel15.setForeground(new java.awt.Color(133, 193, 233));
+        jLabel15.setText("Comentarios:");
+        jLabel15.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 949, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
+                        .addGap(377, 377, 377)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(488, 488, 488)
-                                .addComponent(jLabel1))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(33, 33, 33)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)
-                                .addGap(75, 75, 75)
+                                .addGap(53, 53, 53)
                                 .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
-                                .addGap(55, 55, 55)
-                                .addComponent(jLabel6)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel7)
-                                .addGap(55, 55, 55)
+                                .addGap(290, 290, 290)
                                 .addComponent(jLabel8)
-                                .addGap(31, 31, 31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
-                                .addGap(120, 120, 120)
+                                .addGap(71, 71, 71)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12)
+                            .addComponent(jScrollPane2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel15))))
                 .addContainerGap(140, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel5)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
-                .addGap(38, 38, 38)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel14))
-                .addGap(48, 48, 48)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116)
+                .addGap(113, 113, 113)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("jButton1");
+        jLabel1.getAccessibleContext().setAccessibleName("jLabel1");
+        jLabel2.getAccessibleContext().setAccessibleName("jLabel2");
+        jLabel3.getAccessibleContext().setAccessibleName("jLabel3");
+        jLabel4.getAccessibleContext().setAccessibleName("jLabel4");
+        jLabel7.getAccessibleContext().setAccessibleName("jLabel7");
+        jLabel8.getAccessibleContext().setAccessibleName("jLabel8");
+        jLabel9.getAccessibleContext().setAccessibleName("jLabel9");
+        jLabel10.getAccessibleContext().setAccessibleName("jLabel10");
+        jLabel11.getAccessibleContext().setAccessibleName("jLabel11");
+        jLabel12.getAccessibleContext().setAccessibleName("jLabel12");
         jButton2.getAccessibleContext().setAccessibleName("jButton2");
+        jLabel15.getAccessibleContext().setAccessibleName("jLabel15");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,7 +264,7 @@ public class SeleccionPost extends javax.swing.JFrame
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -233,5 +278,6 @@ public class SeleccionPost extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
