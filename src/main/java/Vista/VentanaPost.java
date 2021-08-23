@@ -1,9 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
+
+import Modelo.ImplementacionRedSocial;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -11,16 +12,21 @@ package Vista;
  */
 public class VentanaPost extends javax.swing.JFrame {
 
+    ImplementacionRedSocial ReferenciaRedSocial;
+    
     /**
      * Creates new form VentanaPost
+     * @param RS
      */
-    public VentanaPost()
+    public VentanaPost(ImplementacionRedSocial RS)
     {
+        this.ReferenciaRedSocial = RS;
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.jButton1.setFocusable(false);
-        this.jButton2.setFocusable(false);
+        this.jButton2.setVisible(false);
+        MostrarContactosEnTabla();
     }
 
     /**
@@ -48,6 +54,9 @@ public class VentanaPost extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +66,11 @@ public class VentanaPost extends javax.swing.JFrame {
 
         jButton1.setText("Volver");
         jButton1.setRequestFocusEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Publicar");
         jButton2.setRequestFocusEnabled(false);
@@ -73,12 +87,17 @@ public class VentanaPost extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(133, 193, 233));
-        jLabel3.setText("Agregar destinos");
+        jLabel3.setText("Agregar destinos:");
         jLabel3.setRequestFocusEnabled(false);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setRequestFocusEnabled(false);
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextArea1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -88,20 +107,38 @@ public class VentanaPost extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Contactos"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setRequestFocusEnabled(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setRequestFocusEnabled(false);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(133, 193, 233));
@@ -120,6 +157,26 @@ public class VentanaPost extends javax.swing.JFrame {
 
         jTextField1.setRequestFocusEnabled(false);
 
+        jButton3.setText("Agregar");
+        jButton3.setRequestFocusEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Borrar");
+        jButton4.setRequestFocusEnabled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setForeground(new java.awt.Color(254, 249, 231));
+        jLabel8.setText("Destino");
+        jLabel8.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,30 +185,40 @@ public class VentanaPost extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(120, 120, 120)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel5)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(163, 163, 163)
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel7)))
+                                        .addComponent(jLabel6))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(219, 219, 219)
+                                        .addComponent(jLabel7))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(120, 120, 120))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)))))
+                                        .addComponent(jLabel3)
+                                        .addGap(376, 376, 376))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(90, 90, 90)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(117, 117, 117)
+                                                .addComponent(jLabel8))))
+                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(528, 528, 528)
                         .addComponent(jLabel1)))
@@ -173,14 +240,22 @@ public class VentanaPost extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(jLabel5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel8)))
                 .addGap(5, 5, 5)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
@@ -200,6 +275,9 @@ public class VentanaPost extends javax.swing.JFrame {
         jLabel6.getAccessibleContext().setAccessibleName("jLabel6");
         jLabel7.getAccessibleContext().setAccessibleName("jLabel7");
         jTextField1.getAccessibleContext().setAccessibleName("jTextField1");
+        jButton3.getAccessibleContext().setAccessibleName("jButton3");
+        jButton4.getAccessibleContext().setAccessibleName("jButton4");
+        jLabel8.getAccessibleContext().setAccessibleName("jLabel8");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,44 +297,119 @@ public class VentanaPost extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    //Volver
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        //Se instancia ventana de sesion iniciada
+        SesionIniciada Retorno = new SesionIniciada(this.ReferenciaRedSocial);
+        
+        //Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        //Se inicia muestro ventana instanciada
+        Retorno.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    //Boton agregar
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //Se recupera y divide el string que representa los destinos seleccionados hasta el momento de presionar el boton agregar
+        String[] DestinosSeleccionados = jTextField1.getText().split(" ");
+        boolean DestinoSeleccionado = false; //Booleano apoyo
+        for(String DestinoActual : DestinosSeleccionados) //Se recorre el arreglo de destinos seleccionados previamente
+        {
+            if(jLabel8.getText().equals(DestinoActual)) //Si el destino ya fue agregado, se cambia el valor booleano a verdadero y se corta ciclo
+            {
+                DestinoSeleccionado = true;
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+        //Si el destino fue seleccionado previamente, se advierte de la situacion por ventana JOptionPane
+        if(DestinoSeleccionado)
+        {JOptionPane.showMessageDialog(this, "Destino ya esta seleccionado!", "Error", JOptionPane.ERROR_MESSAGE);}
+        else //Caso contrario, se agrega al gran string la nueva etiqueta seleccionada
+        {jTextField1.setText(jTextField1.getText()+" "+jLabel6.getText());}
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
+    // Borrar
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        //Se recupera el string almacenado en la ultima casilla, dividiendose este por los espacios entre etiquetas
+        String[] currentLabels = jTextField1.getText().split(" ");
+        String returnString = "";
+        
+        //Se crea el string retorno, pero sin el ultimo elemento
+        for(int i = 0; i < currentLabels.length - 1; i++)
+        {
+            returnString+=currentLabels[i];
+            if(!(i+1 == currentLabels.length-1)) //Si no se ha llegado al penultimo elemento, se agrega un espacio entre etiquetas
+            {returnString+=" ";}
+        }
+        
+        //Se asigna el string actualizado
+        jTextField1.setText(returnString);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaPost().setVisible(true);
-            }
-        });
+    //Se presiono un destino en la tabla
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        //Obtener los datos del post seleccionado
+        int IndicePostSeleccionado = jTable1.getSelectedRow(); //Indice en la tabla del post seleccionado
+        TableModel ModeloTabla = jTable1.getModel(); //Obtencion de modelo de tabla para obtencion de datos
+        
+        //Se recupera destino seleccionado
+        String DestinoSeleccionado = ModeloTabla.getValueAt(IndicePostSeleccionado, 0).toString();
+        
+        //Se asigna a jLabel invisible
+        this.jLabel8.setText(DestinoSeleccionado);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    //Click sobre casilla contenido post
+    private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
+        this.jTextArea1.setFocusable(true);
+    }//GEN-LAST:event_jTextArea1MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        this.jLabel7.setText(this.jComboBox1.getSelectedItem().toString());
+        if(!this.jTextArea1.getText().equals(""))
+        {this.jButton2.setVisible(true);}
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+    
+    //Metodo para rellenar elementos en tabla
+    private void MostrarContactosEnTabla()
+    {
+        //Modelo tabla
+        DefaultTableModel row = (DefaultTableModel)jTable1.getModel();
+
+        //Fila de elementos a asignar en la tabla
+        Object tempRow[] = new Object[1];
+        
+        //
+        int IndiceUsuarioLogueado = this.ReferenciaRedSocial.getUsuarioViaUsername(this.ReferenciaRedSocial.getUsuarioLogueado());
+        
+        //Obtener contactos usuario logueado
+        ArrayList<String> ContactosUsuarioLogueado = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioLogueado).getSeguidosUsuario();
+        
+        //Se recorre los contactos del usuario logueado
+        for(int i = 0; i < ContactosUsuarioLogueado.size(); i++)
+        {
+            tempRow[0] = ContactosUsuarioLogueado.get(i); //Nombre contacto usuario logueado se agrega en unica casilla fila
+            row.addRow(tempRow); //Se agrega a la tabla
+        } 
+    }
+    
+    //Metodo para rellenar jComboBox
+    private void InicializarJComboBox()
+    {
+        this.jComboBox1.addItem("Texto");
+        this.jComboBox1.addItem("Audio");
+        this.jComboBox1.addItem("URL");
+        this.jComboBox1.addItem("Foto");
+        this.jComboBox1.addItem("Video");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -265,6 +418,7 @@ public class VentanaPost extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

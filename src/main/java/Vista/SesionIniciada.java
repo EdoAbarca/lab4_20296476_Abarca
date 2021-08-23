@@ -6,6 +6,8 @@
 package Vista;
 
 import Modelo.ImplementacionRedSocial;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -28,7 +30,7 @@ public class SesionIniciada extends javax.swing.JFrame {
         this.jButton1.setFocusable(false);
         this.jButton2.setFocusable(false);
         this.jButton3.setFocusable(false);
-        jLabel3.setText(ReferenciaRedSocial.getUsuarioLogueado());
+        jLabel3.setText(this.ReferenciaRedSocial.getUsuarioLogueado());
     }
 
     /**
@@ -66,16 +68,23 @@ public class SesionIniciada extends javax.swing.JFrame {
 
         jButton2.setText("Realizar post");
         jButton2.setRequestFocusEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Seguir usuario");
         jButton3.setRequestFocusEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Fecha", "Autor", "Contenido"
@@ -84,12 +93,34 @@ public class SesionIniciada extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(25);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(500);
+        }
 
         jLabel1.setBackground(new java.awt.Color(133, 193, 233));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -104,7 +135,7 @@ public class SesionIniciada extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(133, 193, 233));
-        jLabel3.setText("Usuario logueado");
+        jLabel3.setText("Usuario");
         jLabel3.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -122,11 +153,11 @@ public class SesionIniciada extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(447, Short.MAX_VALUE)
+                .addContainerGap(515, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(87, 87, 87)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel3)
-                .addGap(466, 466, 466))
+                .addGap(518, 518, 518))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jButton1)
@@ -141,10 +172,10 @@ public class SesionIniciada extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
@@ -193,7 +224,88 @@ public class SesionIniciada extends javax.swing.JFrame {
         RegresoAInicio.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    // Se presiono una fila de la tabla
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        //Obtener los datos del post seleccionado
+        int IndicePostSeleccionado = jTable1.getSelectedRow(); //Indice en la tabla del post seleccionado
+        TableModel ModeloTabla = jTable1.getModel(); //Obtencion de modelo de tabla para obtencion de datos
+        
+        //Obtener datos especificos de la fila seleccionada
+        int IdPostSeleccionado = (int) ModeloTabla.getValueAt(IndicePostSeleccionado, 0);
+        String AutorPost = ModeloTabla.getValueAt(IndicePostSeleccionado, 2).toString();
+        
+        //Se tiene ID y autor publicacion, buscar indice de ambos en las colecciones
+        
+        
+        //Instanciar ventana de seleccion post
+        //Necesita la instancia a la red social y la pregunta anteriormente creada
+        SeleccionPost VisualizacionPost = new SeleccionPost(this.ReferenciaRedSocial, IdPostSeleccionado);
+        
+        // Se finaliza muestreo de esta ventana
+        this.setVisible(false);
+        
+        // Se inicia muestreo de ventana instanciada
+        VisualizacionPost.setVisible(true);
+    }//GEN-LAST:event_jTable1MouseClicked
+    
+    //Post
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        // Instanciar ventana para realizar post
+        VentanaPost CreacionPost = new VentanaPost(this.ReferenciaRedSocial);
+        
+        // Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        // Se inicia muestreo ventana instanciada
+        CreacionPost.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    //Follow
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        // Instanciar ventana que permite seguir usuarios
+        VentanaFollow VentanaSeguimientos = new VentanaFollow(this.ReferenciaRedSocial);
+        
+        // Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        // Se inicia muestreo ventana instanciada
+        VentanaSeguimientos.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
+    //Metodo para llenar la tabla con los usuarios registrados
+    private void MostrarPreguntas()
+    {
+        //Se declaran variables de uso para la tabla de la interfaz
+        DefaultTableModel row = (DefaultTableModel)jTable1.getModel();
+        Object tempRow[] = new Object[4];
+        
+        
+        //Se recorre lista usuarios registrados
+        for(int i = 0; i < this.ReferenciaRedSocial.getUsuariosRegistrados().size(); i++)
+        {
+            for(int j = 0; j < this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().size(); j++)
+            {
+                //Se agrega a la tabla los datos de la pregunta referenciada
+                tempRow[0] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().get(j).getIdPublicacion();
+                tempRow[1] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().get(j).getFechaPublicacion();
+                tempRow[2] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().get(j).getAutorPublicacion();
+                tempRow[3] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().get(j).getContenidoPublicacion();
+                row.addRow(tempRow);
+            }
+            for(int k = 0; k < this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().size(); k++)
+            {
+                //Se agrega a la tabla los datos de la pregunta referenciada
+                tempRow[0] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().get(k).getIdPublicacion();
+                tempRow[1] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().get(k).getFechaPublicacion();
+                tempRow[2] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().get(k).getAutorPublicacion();
+                tempRow[3] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().get(k).getContenidoPublicacion();
+                row.addRow(tempRow);
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

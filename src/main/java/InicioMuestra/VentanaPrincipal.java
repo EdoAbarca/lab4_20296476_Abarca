@@ -12,13 +12,13 @@ Seccion: C-3
 Profesor: Daniel Gacitua
 Entrega: Original (23/08/2021)
 
-VERSION SUJETA A CAMBIOS.
+VERSION PRE-FINAL, REQUERIMIENTOS FUNCIONALES MINIMOS SE ESPERAN ESTAR FUNCIONALES.
 */
 
 /**
  * Clase VentanaPrincipal.
  * Esta clase tiene por objetivo instanciar la ventana que dara inicio a la muestra de la interfaz grafica.
- * @version 1.1, 21/08/2021
+ * @version 1.3, 23/08/2021
  * @author Eduardo Abarca
  */
 
@@ -40,10 +40,10 @@ public class VentanaPrincipal
         ImplementacionRedSocial ModeloRedSocial = new ImplementacionRedSocial("Instabook");
         
         //Instancia ventana principal
-        MuestraInicial JFrameInicial = new MuestraInicial(ModeloRedSocial);
+        MuestraInicial VentanaInicioRedSocial = new MuestraInicial(ModeloRedSocial);
         
-        //Inicio ejecucion ventana principal
-        JFrameInicial.setVisible(true);
+        //Inicio muestreo ventana principal
+        VentanaInicioRedSocial.setVisible(true);
     }
-    
 }
+

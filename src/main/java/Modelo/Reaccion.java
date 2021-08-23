@@ -3,7 +3,7 @@ package Modelo;
 /**
  * Clase Reaccion. Esta clase tiene por objetivo representar una reaccion a una publicacion en una red social.
  * Clase abstracta, contendra los atributos y metodos a heredar en las clases "Like" y "Comentario"
- * @version 1.0, 21/08/2021
+ * @version 1.1, 23/08/2021
  * @author Eduardo Abarca
  */
 
@@ -62,10 +62,5 @@ public abstract class Reaccion
     // Sin setters
     
     /* METODOS ADICIONALES */
-
-    /**
-     * Metodo abstracto que, en las clases a heredar, transformara la instancia a un string
-     * @return String a mostrar por consola/terminal
-     */
-    public abstract String ReaccionAString();
+    // Sin metodos adicionales.
 }

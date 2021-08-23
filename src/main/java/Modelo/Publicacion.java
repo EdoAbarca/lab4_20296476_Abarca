@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase Publicacion. Esta clase tiene por objetivo representar una publicacion en una red social.
  * Clase abstracta, contendra los atributos y metodos a heredar en las clases "PublicacionOriginal" y "PublicacionCompartida"
- * @version 1.0, 21/08/2021
+ * @version 1.1, 23/08/2021
  * @author Eduardo Abarca
  */
 public abstract class Publicacion
@@ -95,14 +95,7 @@ public abstract class Publicacion
     // Sin setters.
     
     /* METODOS ADICIONALES */
-    
-    public abstract String ListaDestinosAString();
-    
-    public abstract String LikesPublicacionAString();
-    
-    public abstract String ComentariosPublicacionAString();
-    
-    public abstract String PublicacionAString();
+    // Sin metodos adicionales.
     
     /*
     Por que esta clase no tiene como atributo un contenedor (ArrayList) de likes y publicaciones?

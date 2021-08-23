@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase Usuario. Esta clase tiene por objetivo representar un usuario en una red social.
  * 
- * @version 1.0, 21/08/2021
+ * @version 1.1, 23/08/2021
  * @author Eduardo Abarca
  */
 public class Usuario
@@ -44,15 +44,6 @@ public class Usuario
     }
     
     /* GETTERS */
-    /*
-    public ArrayList<PublicacionOriginal> getPublicacionesUsuario() {
-        return PublicacionesUsuario;
-    }
-    
-    public void setPublicacion()
-    {
-        this.PublicacionesUsuario.add(e);
-    }*/
     
     /**
      * Getter para NombreUsuario
@@ -67,6 +58,27 @@ public class Usuario
      */
     public String getContrasenia()
     {return this.Contrasenia;}
+    
+    /**
+     * Getter para 
+     * @return 
+     */
+    public ArrayList<String> getSeguidosUsuario()
+    {return this.ListaSeguidos;}
+    
+    /**
+     * Getter para 
+     * @return 
+     */
+    public ArrayList<PublicacionOriginal> getPublicacionesOrUsuario()
+    {return this.PublicacionesUsuario;}
+    
+    /**
+     * Getter para 
+     * @return 
+     */
+    public ArrayList<PublicacionCompartida> getPublicacionesCompUsuario()
+    {return this.PublicacionesCompartidas;}
     
     /**
      * Getter de indice de publicacion original mediante ID
@@ -114,15 +126,12 @@ public class Usuario
         
         //Se retorna indice
         return indicePublicacionRetorno;
-    }
-    
+    } 
     
     /* SETTERS */
     //Sin setters
-    
-    
+       
     /* METODOS ADICIONALES */
-
     
     /**
      * Metodo que revisa si el usuario ingresado por parametro se encuentra en la lista seguidos
@@ -202,84 +211,5 @@ public class Usuario
         
         //Se retorna resultado
         return EstanDestinos;
-    }
-    
-    /**
-     * Metodo que transforma la lista de seguidos a un string
-     * @return String con la informacion de lista seguidos
-     */
-    public String ListaSeguidosAString()
-    {
-        String StringSeguidos = "";
-        if(this.ListaSeguidos.isEmpty())
-        {StringSeguidos += "SIN SEGUIDOS.\n\n";}
-        else
-        {
-            for(int i = 0; i < this.ListaSeguidos.size(); i++)
-            {StringSeguidos+=this.ListaSeguidos.get(i)+"\n";}
-        }
-        return StringSeguidos;
-    }
-    
-    /**
-     * Metodo que transforma la lista de seguidores a un string
-     * @return String con la informacion de lista seguidores
-     */
-    public String ListaSeguidoresAString()
-    {
-        String StringSeguidores = "";
-        if(this.ListaSeguidores.isEmpty())
-        {StringSeguidores += "SIN SEGUIDORES.\n\n";}
-        else
-        {
-            for(int i = 0; i < this.ListaSeguidores.size(); i++)
-            {StringSeguidores+=this.ListaSeguidores.get(i)+"\n";}
-        }
-        return StringSeguidores;
-    }
-    
-    /**
-     * Metodo que transforma la instancia de usuario a un string
-     * @return String con la informacion del usuario
-     */
-    public String UsuarioAString()
-    {
-        String StringDatosUsuario, StringPublicacionesUsuario;
-        
-        //Se pasan credenciales de usuario a string
-        StringDatosUsuario = "\nId usuario: "+ Integer.toString(this.IdUsuario) + " - Nombre usuario: "+ this.NombreUsuario+"\n\nSeguidos:\n\n"+ListaSeguidosAString()+"\n\nSeguidores:\n\n"+ListaSeguidoresAString();
-        
-        //Mensaje por defecto por parte de publicaciones originales usuario
-        StringPublicacionesUsuario = "\n\nPUBLICACIONES USUARIO:\n\n";
-        
-        //Si no hay publicaciones originales para este usuario, se deja mensaje por defecto
-        if(this.PublicacionesUsuario.isEmpty())
-        {StringPublicacionesUsuario+= "SIN PUBLICACIONES CREADAS.\n\n";}
-        
-        //Caso contrario
-        else
-        {
-            //Se pasa cada publicacion original a string
-            for(int i = 0; i < this.PublicacionesUsuario.size(); i++)
-            {StringPublicacionesUsuario += this.PublicacionesUsuario.get(i).PublicacionAString();}
-        }
-        
-        //Mensaje por defecto por parte de publicaciones compartidas usuario
-        StringPublicacionesUsuario += "\n\nPUBLICACIONES COMPARTIDAS POR OTROS USUARIOS:\n\n";
-        
-        //Si no hay publicaciones compartidas, se deja mensaje por defecto
-        if(this.PublicacionesCompartidas.isEmpty())
-        {StringPublicacionesUsuario+= "SIN PUBLICACIONES COMPARTIDAS POR PARTE DE OTROS USUARIOS.\n\n";}
-        
-        //Caso contrario
-        else
-        {
-            //Se pasa cada publicacion compartida a string
-            for(int i = 0; i < this.PublicacionesCompartidas.size(); i++)
-            {StringPublicacionesUsuario += this.PublicacionesCompartidas.get(i).PublicacionAString();}
-        }
-        
-        //Se retorna concatenacion de ambos strings generados
-        return StringDatosUsuario + StringPublicacionesUsuario;
     }
 }

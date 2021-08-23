@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
+
+import Modelo.ImplementacionRedSocial;
+import Modelo.Usuario;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -11,16 +14,22 @@ package Vista;
  */
 public class VentanaFollow extends javax.swing.JFrame {
 
+    ImplementacionRedSocial ReferenciaRedSocial;
+    
     /**
      * Creates new form VentanaFollow
+     * @param RS
      */
-    public VentanaFollow()
+    public VentanaFollow(ImplementacionRedSocial RS)
     {
+        this.ReferenciaRedSocial = RS;
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.jButton1.setFocusable(false);
+        this.jButton2.setVisible(false);
         this.jButton2.setFocusable(false);
+        MostrarUsuariosRegistrados();
     }
 
     /**
@@ -49,24 +58,43 @@ public class VentanaFollow extends javax.swing.JFrame {
         jPanel1.setRequestFocusEnabled(false);
 
         jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Seguir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre usuario"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTable1.setRequestFocusEnabled(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jTextField1.setText("jTextField1");
         jTextField1.setRequestFocusEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -129,6 +157,7 @@ public class VentanaFollow extends javax.swing.JFrame {
                 .addGap(76, 76, 76))
         );
 
+        jTextField1.getAccessibleContext().setAccessibleName("jTextField1");
         jLabel1.getAccessibleContext().setAccessibleName("jLabel1");
         jLabel2.getAccessibleContext().setAccessibleName("jLabel2");
         jLabel3.getAccessibleContext().setAccessibleName("jLabel3");
@@ -150,40 +179,83 @@ public class VentanaFollow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    //Volver
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Se instancia ventana de sesion iniciada
+        SesionIniciada Retorno = new SesionIniciada(this.ReferenciaRedSocial);
+        
+        //Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        //Se inicia muestro ventana instanciada
+        Retorno.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    //Se clickea un usuario de la tabla
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        //Obtener los datos del usuario seleccionado en la tabla
+        int PosicionUsuario = jTable1.getSelectedRow(); //Indice usuario en tabla
+        TableModel model = jTable1.getModel(); //Modelo para operaciones de datos
+        
+        //Guardar en el jTextField asociado el usuario seleccionado
+        this.jTextField1.setText(model.getValueAt(PosicionUsuario, 0).toString());
+        
+        //Si el boton Seguir usuario no estaba visible, se cambia a visible (para proteger metodo Follow de recibir string vacio)
+        if(!this.jButton2.isVisible())
+        {this.jButton2.setVisible(true);}
+    }//GEN-LAST:event_jTable1MouseClicked
+    
+    //Boton Seguir presionado
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaFollow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaFollow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaFollow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaFollow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        // Llamar a metodo Follow de la red social
+        String ResultadoSeguimiento = this.ReferenciaRedSocial.Follow(this.jTextField1.getText());
+        
+        // Divison array para revisar resultado de aplicar Register con los datos ingresados
+        String[] DivisionResultado = ResultadoSeguimiento.split(" ");
+        
+        // Si la operacion fue exitosa
+        if(!DivisionResultado[0].equals("Error:"))
+        {
+            // Se muestra ventana de resultado
+            JOptionPane.showMessageDialog(this, ResultadoSeguimiento);
+            
+            // Instanciar la ventana de inicio
+            SesionIniciada VentanaConSesion = new SesionIniciada(this.ReferenciaRedSocial);
+            
+            // Finalizar muestreo ventana actual
+            this.setVisible(false);
+            
+            // Iniciar muestreo ventana inicio
+            VentanaConSesion.setVisible(true);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaFollow().setVisible(true);
-            }
-        });
+        
+        // Caso contrario, se muestra JOptionPane, en su version en error (se mantiene en ventana actual)
+        else
+        {
+            JOptionPane.showMessageDialog(this, ResultadoSeguimiento, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    //Metodo para llenar la tabla con los usuarios registrados
+    private void MostrarUsuariosRegistrados()
+    {
+        //Se declaran variables de uso para la tabla de la interfaz
+        DefaultTableModel row = (DefaultTableModel)jTable1.getModel();
+        Object tempRow[] = new Object[1];
+        
+        //Obtener lista usuarios registrados hasta el llamado a este metodo
+        ArrayList<Usuario> UsuariosRegistrados = this.ReferenciaRedSocial.getUsuariosRegistrados();
+        
+        //Se recorre lista usuarios registrados
+        for(int i = 0; i < UsuariosRegistrados.size(); i++)
+        {
+            //Se agrega a la tabla el usuario registrado apuntado por el iterador
+            tempRow[0] = UsuariosRegistrados.get(i).getNombreUsuario();
+            row.addRow(tempRow);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

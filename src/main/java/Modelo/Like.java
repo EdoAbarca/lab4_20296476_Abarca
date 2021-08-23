@@ -3,7 +3,7 @@ package Modelo;
 /**
  * Clase Like. Esta clase tiene por objetivo representar un "Me gusta" a una publicacion en una red social.
  * Clase hija de "Reaccion", el Me gusta puede ser dirigido a una publicacion o un comentario.
- * @version 1.0, 21/08/2021
+ * @version 1.1, 23/08/2021
  * @author Eduardo Abarca
  */
 
@@ -37,14 +37,5 @@ public class Like extends Reaccion
     // Sin setters.
     
     /* METODOS ADICIONALES */
-    
-    /**
-     * Metodo que transforma este like a un string
-     * @return String con informacion del like (String)
-     */
-    @Override
-    public String ReaccionAString()
-    {
-        return "\n\nId: "+Integer.toString(this.IdReaccion)+" - Id pregunta seleccionada: "+Integer.toString(this.IdPublicacionSeleccionada) + " - Id reaccion seleccionada: " + Integer.toString(this.IdReaccionSeleccionada) + "\nAutor like: "+this.AutorReaccion + " - Fecha like: "+ this.FechaReaccion + "\n";
-    }
+    // Sin metodos adicionales.
 }

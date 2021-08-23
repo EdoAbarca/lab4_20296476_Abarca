@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Modelo.ImplementacionRedSocial;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +21,7 @@ public class VentanaLogin extends javax.swing.JFrame
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.jButton1.setFocusable(false);
+        this.jButton2.setVisible(false);
         this.jButton2.setFocusable(false);
     }
 
@@ -83,7 +80,7 @@ public class VentanaLogin extends javax.swing.JFrame
         jLabel1.setBackground(new java.awt.Color(133, 193, 233));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(133, 193, 233));
-        jLabel1.setText("Iniciar sesión");
+        jLabel1.setText("Iniciar sesion");
 
         jTextField1.setRequestFocusEnabled(false);
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,7 +99,6 @@ public class VentanaLogin extends javax.swing.JFrame
         jLabel2.setText("Usuario");
         jLabel2.setRequestFocusEnabled(false);
 
-        jPasswordField1.setText("jPasswordField1");
         jPasswordField1.setRequestFocusEnabled(false);
         jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -170,6 +166,7 @@ public class VentanaLogin extends javax.swing.JFrame
 
         jTextField1.getAccessibleContext().setAccessibleName("jTextField1");
         jLabel2.getAccessibleContext().setAccessibleName("jLabel2");
+        jPasswordField1.getAccessibleContext().setAccessibleName("jPasswordField1");
         jLabel3.getAccessibleContext().setAccessibleName("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,22 +247,36 @@ public class VentanaLogin extends javax.swing.JFrame
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Boton Iniciar sesion
         // Obtener los datos ingresados en las casillas
-        //String textBox = jTextField1.getText();
-        //String passBox = String.valueOf(jPasswordField1.getPassword());
+        String textBox = jTextField1.getText();
+        String passBox = String.valueOf(jPasswordField1.getPassword());
         
         // Llamar a metodo Login de la red social
+        String ResultadoInicioSesion = this.ReferenciaRedSocial.Login(textBox, passBox);
         
-        // En caso de haber logrado inicio sesion (mostrando JOptionPane avisando del resultado):
-        //JOptionPane.showMessageDialog(this, "Sesion iniciada exitosamente!");
+        // Divison array para revisar resultado de aplicar Register con los datos ingresados
+        String[] DivisionResultado = ResultadoInicioSesion.split(" ");
         
-        // Instanciar la ventana a dirigirse por lograr inicio sesion
+        // Si la operacion fue exitosa
+        if(!DivisionResultado[0].equals("Error:"))
+        {
+            // Se muestra ventana de resultado
+            JOptionPane.showMessageDialog(this, ResultadoInicioSesion);
+            
+            // Instanciar la ventana de inicio
+            SesionIniciada VentanaConSesion = new SesionIniciada(this.ReferenciaRedSocial);
+            
+            // Finalizar muestreo ventana actual
+            this.setVisible(false);
+            
+            // Iniciar muestreo ventana inicio
+            VentanaConSesion.setVisible(true);
+        }
         
-        // Validar visibilidad ventana a dirigirse
-        
-        // Negar visibilidad de esta ventana
-        
-        // Caso contrario, se muestra JOptionPane avisando de porque no resulto (se mantiene en ventana actual)
-        //JOptionPane.showMessageDialog(this, "Credenciales incorrectas!", "Error", JOptionPane.ERROR_MESSAGE);
+        // Caso contrario, se muestra JOptionPane, en su version en error (se mantiene en ventana actual)
+        else
+        {
+            JOptionPane.showMessageDialog(this, ResultadoInicioSesion, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

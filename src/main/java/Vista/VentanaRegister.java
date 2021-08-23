@@ -1,6 +1,7 @@
 package Vista;
 
 import Modelo.ImplementacionRedSocial;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,6 +49,11 @@ public class VentanaRegister extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(254, 249, 231));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
         jPanel1.setRequestFocusEnabled(false);
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +74,6 @@ public class VentanaRegister extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setText("jPasswordField1");
         jPasswordField1.setRequestFocusEnabled(false);
         jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -152,6 +157,7 @@ public class VentanaRegister extends javax.swing.JFrame {
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("jLabel1");
+        jPasswordField1.getAccessibleContext().setAccessibleName("jPasswordField1");
         jTextField1.getAccessibleContext().setAccessibleName("jTextField1");
         jLabel2.getAccessibleContext().setAccessibleName("jLabel2");
         jLabel3.getAccessibleContext().setAccessibleName("jLabel3");
@@ -176,8 +182,6 @@ public class VentanaRegister extends javax.swing.JFrame {
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         this.jTextField1.setFocusable(true);
         this.jPasswordField1.setFocusable(false);
-        this.jButton1.setFocusable(false);
-        this.jButton2.setFocusable(false);
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
@@ -213,8 +217,6 @@ public class VentanaRegister extends javax.swing.JFrame {
     private void jPasswordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseClicked
         this.jTextField1.setFocusable(false);
         this.jPasswordField1.setFocusable(true);
-        this.jButton1.setFocusable(false);
-        this.jButton2.setFocusable(false);
     }//GEN-LAST:event_jPasswordField1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -236,21 +238,38 @@ public class VentanaRegister extends javax.swing.JFrame {
         String passBox = String.valueOf(jPasswordField1.getPassword());
         
         // Llamar a metodo Register de la red social
-        //this.ReferenciaRedSocial.Register(textBox, passBox);
-        //NO SIRVE QUE LOS REQUERIMIENTOS FUNCIONALES SEAN VOID, CAMBIAR RETORNOS Y ELIMINAR MENSAJES POR CONSOLA
+        String ResultadoRegistro = this.ReferenciaRedSocial.Register(textBox, passBox);
         
-        // En caso de haber logrado registro (mostrando JOptionPane avisando del resultado):
-        //JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente!");
+        // Divison array para revisar resultado de aplicar Register con los datos ingresados
+        String[] DivisionResultado = ResultadoRegistro.split(" ");
         
-        // Instanciar la ventana desde la cual se llego aca
+        // Si la operacion fue exitosa
+        if(!DivisionResultado[0].equals("Error:"))
+        {
+            // Se muestra ventana de resultado
+            JOptionPane.showMessageDialog(this, ResultadoRegistro);
+            
+            // Instanciar la ventana de inicio
+            MuestraInicial Retorno = new MuestraInicial(this.ReferenciaRedSocial);
+            
+            // Finalizar muestreo ventana actual
+            this.setVisible(false);
+            
+            // Iniciar muestreo ventana inicio
+            Retorno.setVisible(true);
+        }
         
-        // Validar visibilidad ventana a dirigirse
-        
-        // Negar visibilidad de esta ventana
-        
-        // Caso contrario, se muestra JOptionPane avisando de porque no resulto (se mantiene en ventana actual)
-        //JOptionPane.showMessageDialog(this, "Datos de registro ya estan usados", "Error", JOptionPane.ERROR_MESSAGE);
+        // Caso contrario, se muestra JOptionPane, en su version en error (se mantiene en ventana actual)
+        else
+        {
+            JOptionPane.showMessageDialog(this, ResultadoRegistro, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        this.jTextField1.setFocusable(false);
+        this.jPasswordField1.setFocusable(false);
+    }//GEN-LAST:event_jPanel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

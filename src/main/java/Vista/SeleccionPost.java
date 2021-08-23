@@ -5,18 +5,32 @@
  */
 package Vista;
 
+import Modelo.ImplementacionRedSocial;
+
 /**
  *
  * @author ASUS
  */
 public class SeleccionPost extends javax.swing.JFrame
 {
+    
+    ImplementacionRedSocial ReferenciaRedSocial;
+    int IdPreguntaSeleccionada;
+    
     /**
      * Creates new form PreguntaSeleccionada
+     * @param RS
+     * @param ID
      */
-    public SeleccionPost()
+    public SeleccionPost(ImplementacionRedSocial RS, int ID)
     {
+        this.ReferenciaRedSocial = RS;
+        this.IdPreguntaSeleccionada = ID;
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.jButton2.setFocusable(false);
+        this.jButton1.setFocusable(false);
     }
 
     /**
@@ -60,17 +74,41 @@ public class SeleccionPost extends javax.swing.JFrame
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Responde a", "Fecha", "Autor", "Contenido"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(20);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(20);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(60);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(600);
+        }
 
         jButton1.setText("Volver");
 
@@ -133,8 +171,6 @@ public class SeleccionPost extends javax.swing.JFrame
 
         jButton2.setText("Compartir post");
 
-        jTextField1.setText("jTextField1");
-
         jLabel15.setForeground(new java.awt.Color(133, 193, 233));
         jLabel15.setText("Comentarios:");
         jLabel15.setRequestFocusEnabled(false);
@@ -173,7 +209,7 @@ public class SeleccionPost extends javax.swing.JFrame
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
-                                .addGap(71, 71, 71)
+                                .addGap(59, 59, 59)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,8 +217,8 @@ public class SeleccionPost extends javax.swing.JFrame
                             .addComponent(jScrollPane2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel15))))
                 .addContainerGap(140, Short.MAX_VALUE))
         );
@@ -234,6 +270,7 @@ public class SeleccionPost extends javax.swing.JFrame
         jLabel11.getAccessibleContext().setAccessibleName("jLabel11");
         jLabel12.getAccessibleContext().setAccessibleName("jLabel12");
         jButton2.getAccessibleContext().setAccessibleName("jButton2");
+        jTextField1.getAccessibleContext().setAccessibleName("jTextField1");
         jLabel15.getAccessibleContext().setAccessibleName("jLabel15");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
