@@ -8,7 +8,7 @@ import java.util.Calendar;
  * Clase RedSocial. Esta clase tiene por objetivo representar una red social generica dentro del programa.
  * Aca se encontraran los atributos basicos de una red social y los metodos necesarios para poder interactuar en ella.
  * Requerimientos funcionales cubiertos en este archivo.
- * @version 1.0, 21/08/2021
+ * @version 1.1, 22/08/2021
  * @author Eduardo Abarca
  */
 public class ImplementacionRedSocial implements RedSocial
@@ -16,9 +16,8 @@ public class ImplementacionRedSocial implements RedSocial
     /* /////////////////////////////////////////////////// ATRIBUTOS /////////////////////////////////////////////////// */
     private final String NombreRedSocial;
     private final String FechaRegistroRedSocial;
-    private final ArrayList<Usuario> ListaUsuarios;
+    final ArrayList<Usuario> ListaUsuarios;
     private String UsuarioLogueado;
-    private boolean ProgramaEnUso;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
@@ -35,7 +34,6 @@ public class ImplementacionRedSocial implements RedSocial
         this.FechaRegistroRedSocial = FechaDeHoy();
         this.ListaUsuarios = new ArrayList<>();
         this.UsuarioLogueado = null;
-        this.ProgramaEnUso = false;
     }
     
     /* GETTERS */
@@ -54,33 +52,7 @@ public class ImplementacionRedSocial implements RedSocial
     public String getUsuarioLogueado()
     {return this.UsuarioLogueado;}
     
-    /**
-     * Getter para ProgramaEnUso
-     * @return ProgramaEnUso (String)
-     */
-    public boolean getProgramaEnUso()
-    {return this.ProgramaEnUso;}
-    
-    
     /* SETTERS */
-
-    /**
-     * Primer setter para ProgramaEnUso.
-     */
-
-    @Override 
-    public void IniciarPrograma()
-    {this.ProgramaEnUso = true;}
-    
-    /**
-     * Segundo setter para ProgramaEnUso.
-     */
-    @Override
-    public void FinalizarPrograma()
-    {
-        System.out.println("\nSee ya soon!");
-        this.ProgramaEnUso = false;
-    }
     
     /**
      * Primer setter para UsuarioLogueado

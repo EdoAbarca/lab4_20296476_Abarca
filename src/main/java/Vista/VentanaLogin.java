@@ -5,17 +5,22 @@
  */
 package Vista;
 
+import Modelo.ImplementacionRedSocial;
+
 /**
  *
  * @author ASUS
  */
-public class VentanaLogin extends javax.swing.JFrame {
-
+public class VentanaLogin extends javax.swing.JFrame
+{
+    ImplementacionRedSocial ReferenciaRedSocial;
     /**
      * Creates new form VentanaLogin
+     * @param RS
      */
-    public VentanaLogin()
+    public VentanaLogin(ImplementacionRedSocial RS)
     {
+        this.ReferenciaRedSocial = RS;
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -61,17 +66,36 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         jButton1.setText("Volver");
         jButton1.setRequestFocusEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Iniciar sesión");
         jButton2.setRequestFocusEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(133, 193, 233));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(133, 193, 233));
         jLabel1.setText("Iniciar sesión");
 
-        jTextField1.setText("jTextField1");
         jTextField1.setRequestFocusEnabled(false);
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(133, 193, 233));
@@ -80,6 +104,16 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         jPasswordField1.setText("jPasswordField1");
         jPasswordField1.setRequestFocusEnabled(false);
+        jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseClicked(evt);
+            }
+        });
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(133, 193, 233));
@@ -134,6 +168,7 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addGap(174, 174, 174))
         );
 
+        jTextField1.getAccessibleContext().setAccessibleName("jTextField1");
         jLabel2.getAccessibleContext().setAccessibleName("jLabel2");
         jLabel3.getAccessibleContext().setAccessibleName("jLabel3");
 
@@ -155,40 +190,84 @@ public class VentanaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        this.jTextField1.setFocusable(true);
+        this.jPasswordField1.setFocusable(false);
+        this.jButton1.setFocusable(false);
+        this.jButton2.setFocusable(false);
+    }//GEN-LAST:event_jTextField1MouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaLogin().setVisible(true);
-            }
-        });
-    }
+    private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
+        //Se obtiene lo que hay en ambas casillas
+        String textBox = jTextField1.getText();
+        String passBox = String.valueOf(jPasswordField1.getPassword());
+        //Si alguna de las casillas esta vaci­a
+        if(textBox.trim().equals("") || passBox.trim().equals(""))
+        {
+            jButton2.setVisible(false); //No se permite seleccionar el boton
+        }
+        else //Caso contrario
+        {
+            jButton2.setVisible(true); //Se permite seleccionar boton
+        }
+    }//GEN-LAST:event_jPasswordField1KeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        //Se obtiene lo que hay en ambas casillas
+        String textBox = jTextField1.getText();
+        String passBox = String.valueOf(jPasswordField1.getPassword());
+        //Si alguna de las casillas esta vaci­a
+        if(textBox.trim().equals("") || passBox.trim().equals(""))
+        {
+            jButton2.setVisible(false); //No se permite seleccionar el boton
+        }
+        else //Caso contrario
+        {
+            jButton2.setVisible(true); //Se permite seleccionar boton
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jPasswordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseClicked
+        this.jTextField1.setFocusable(false);
+        this.jPasswordField1.setFocusable(true);
+        this.jButton1.setFocusable(false);
+        this.jButton2.setFocusable(false);
+    }//GEN-LAST:event_jPasswordField1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Boton Volver
+        // Se instancia ventana de inicio
+        MuestraInicial RegresoAInicio = new MuestraInicial(this.ReferenciaRedSocial);
+        
+        // Se finaliza muestreo de esta ventana
+        this.setVisible(false);
+        
+        // Se inicia muestreo de ventana instanciada
+        RegresoAInicio.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Boton Iniciar sesion
+        // Obtener los datos ingresados en las casillas
+        //String textBox = jTextField1.getText();
+        //String passBox = String.valueOf(jPasswordField1.getPassword());
+        
+        // Llamar a metodo Login de la red social
+        
+        // En caso de haber logrado inicio sesion (mostrando JOptionPane avisando del resultado):
+        //JOptionPane.showMessageDialog(this, "Sesion iniciada exitosamente!");
+        
+        // Instanciar la ventana a dirigirse por lograr inicio sesion
+        
+        // Validar visibilidad ventana a dirigirse
+        
+        // Negar visibilidad de esta ventana
+        
+        // Caso contrario, se muestra JOptionPane avisando de porque no resulto (se mantiene en ventana actual)
+        //JOptionPane.showMessageDialog(this, "Credenciales incorrectas!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

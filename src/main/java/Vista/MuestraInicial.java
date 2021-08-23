@@ -13,13 +13,15 @@ import Modelo.ImplementacionRedSocial;
  */
 public class MuestraInicial extends javax.swing.JFrame
 {
+    ImplementacionRedSocial ReferenciaRedSocial;
+    
     /**
      * Creates new form MuestraInicial
      * @param RS
      */
     public MuestraInicial(ImplementacionRedSocial RS)
     {
-        ImplementacionRedSocial CopiaRedSocial = RS;
+        this.ReferenciaRedSocial = RS;
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -50,9 +52,19 @@ public class MuestraInicial extends javax.swing.JFrame
 
         jButton1.setText("Registrarse");
         jButton1.setRequestFocusEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Iniciar sesión");
         jButton2.setRequestFocusEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(133, 193, 233));
@@ -112,6 +124,28 @@ public class MuestraInicial extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Boton registrarse
+        VentanaRegister DirigirRegistro = new VentanaRegister(this.ReferenciaRedSocial);
+        
+        //Mostrar ventana instanciada
+        DirigirRegistro.setVisible(true);
+       
+        //Finalizar muestra ventana actual
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Boton Iniciar sesion
+        VentanaLogin DirigirInicioSesion = new VentanaLogin(this.ReferenciaRedSocial);
+        
+        //Mostrar ventana instanciada
+        DirigirInicioSesion.setVisible(true);
+       
+        //Finalizar muestra ventana actual
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

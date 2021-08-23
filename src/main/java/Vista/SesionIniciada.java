@@ -5,23 +5,30 @@
  */
 package Vista;
 
+import Modelo.ImplementacionRedSocial;
+
 /**
  *
  * @author ASUS
  */
 public class SesionIniciada extends javax.swing.JFrame {
 
+    ImplementacionRedSocial ReferenciaRedSocial;
+    
     /**
      * Creates new form SesionIniciada
+     * @param RS
      */
-    public SesionIniciada()
+    public SesionIniciada(ImplementacionRedSocial RS)
     {
+        this.ReferenciaRedSocial = RS;
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.jButton1.setFocusable(false);
         this.jButton2.setFocusable(false);
         this.jButton3.setFocusable(false);
+        jLabel3.setText(ReferenciaRedSocial.getUsuarioLogueado());
     }
 
     /**
@@ -51,6 +58,11 @@ public class SesionIniciada extends javax.swing.JFrame {
 
         jButton1.setText("Cerrar sesión");
         jButton1.setRequestFocusEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Realizar post");
         jButton2.setRequestFocusEnabled(false);
@@ -66,9 +78,17 @@ public class SesionIniciada extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Fecha", "Autor", "Contenido"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setBackground(new java.awt.Color(133, 193, 233));
@@ -121,7 +141,7 @@ public class SesionIniciada extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -158,6 +178,20 @@ public class SesionIniciada extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Boton Cerrar sesion
+        // Llamar a metodo que cierra sesion
+        
+        // Instanciar ventana de inicio, ventana a la que se regresa luego de cerrar sesion (para proteger metodos que necesitan sesion iniciada)
+        MuestraInicial RegresoAInicio = new MuestraInicial(this.ReferenciaRedSocial);
+        
+        // Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        // Se inicia muestreo ventana instanciada
+        RegresoAInicio.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
