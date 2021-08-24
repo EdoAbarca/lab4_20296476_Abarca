@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ImplementacionRedSocial;
@@ -251,14 +247,41 @@ public class VentanaShare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Volver de share
+    // Boton volver
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //Se instancia ventana de sesion iniciada
+        SeleccionPost RegresoAInfoPost = new SeleccionPost(this.ReferenciaRedSocial, this.IdPreguntaSeleccionada);
+        
+        //Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        //Se inicia muestro ventana instanciada
+        RegresoAInfoPost.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
     
     //Boton compartir
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
+        //Se genera arraylist de destinos seleccionados
+        ArrayList<String> DestinosShare = new ArrayList<>();
+        String[] DestinosIngresados = this.jTextField1.getText().split(" ");
+        for(int i = 0; i < DestinosIngresados.length; i++)
+        {DestinosShare.add(DestinosIngresados[i]);}
+
+        // Se llama a RF Share, con los datos ingresados por los campos de la ventana
+        String Resultado = this.ReferenciaRedSocial.Share(Integer.parseInt(this.jLabel3.getText()), DestinosShare);
+        
+        // Se presenta resultado en mensaje emergente
+        JOptionPane.showMessageDialog(this, Resultado);
+            
+        // Se instancia ventana de sesion iniciada
+        SesionIniciada VentanaConSesion = new SesionIniciada(this.ReferenciaRedSocial);
+            
+        // Finalizar muestreo ventana actual
+        this.setVisible(false);
+            
+        //Se inicia muestreo ventana instanciada
+        VentanaConSesion.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
     
     //Boton agregar

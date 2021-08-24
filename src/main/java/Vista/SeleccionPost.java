@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ImplementacionRedSocial;
+import Modelo.PublicacionCompartida;
+import Modelo.PublicacionOriginal;
 
 /**
  *
@@ -31,6 +29,7 @@ public class SeleccionPost extends javax.swing.JFrame
         this.setLocationRelativeTo(null);
         this.jButton2.setFocusable(false);
         this.jButton1.setFocusable(false);
+        RellenarDatosVentana();
     }
 
     /**
@@ -111,6 +110,11 @@ public class SeleccionPost extends javax.swing.JFrame
         }
 
         jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(133, 193, 233));
@@ -170,6 +174,11 @@ public class SeleccionPost extends javax.swing.JFrame
         jLabel13.setRequestFocusEnabled(false);
 
         jButton2.setText("Compartir post");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel15.setForeground(new java.awt.Color(133, 193, 233));
         jLabel15.setText("Comentarios:");
@@ -180,23 +189,36 @@ public class SeleccionPost extends javax.swing.JFrame
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(140, 140, 140)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                    .addComponent(jLabel12)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(377, 377, 377)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel15)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                                .addGap(237, 237, 237)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9)
+                                        .addGap(98, 98, 98))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,22 +226,11 @@ public class SeleccionPost extends javax.swing.JFrame
                                 .addGap(53, 53, 53)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addGap(290, 290, 290)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel12)
-                            .addComponent(jScrollPane2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel15))))
+                                .addComponent(jLabel5)))
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(140, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -290,7 +301,84 @@ public class SeleccionPost extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    //Boton volver
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        //Se instancia ventana de sesion iniciada
+        SesionIniciada Retorno = new SesionIniciada(this.ReferenciaRedSocial);
+        
+        //Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        //Se inicia muestro ventana instanciada
+        Retorno.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
+    // Boton Compartir post presionado
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        //Se instancia ventana de sesion iniciada
+        VentanaShare DirigidoACompartir = new VentanaShare(this.ReferenciaRedSocial, this.IdPreguntaSeleccionada);
+        
+        //Se finaliza muestreo ventana actual
+        this.setVisible(false);
+        
+        //Se inicia muestro ventana instanciada
+        DirigidoACompartir.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void RellenarDatosVentana()
+    {
+        int IndiceUsuarioPreguntaOr = this.ReferenciaRedSocial.ReferenciarUsuarioPublicacionOr(this.IdPreguntaSeleccionada);
+        int IndiceUsuarioPreguntaComp = this.ReferenciaRedSocial.ReferenciarUsuarioPublicacionComp(this.IdPreguntaSeleccionada);
+        
+        if(!(IndiceUsuarioPreguntaOr == -1))
+        {
+            int PublicacionOrApuntada = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaOr).getPublicacionOriginalPorId(this.IdPreguntaSeleccionada);
+            PublicacionOriginal OR = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaOr).getPublicacionesOrUsuario().get(PublicacionOrApuntada);
+            
+            //Realizar seteos de labels
+            
+            this.jLabel3.setText(Integer.toString(OR.getIdPublicacion()));
+            this.jLabel5.setText("0");
+            this.jLabel7.setText(OR.getTipoPublicacion());
+            this.jLabel9.setText(OR.getFechaPublicacion());
+            this.jLabel11.setText(OR.getAutorPublicacion());
+            this.jTextArea1.setText(OR.getContenidoPublicacion());
+            
+            //jTextField debe recibir string con destinatarios, no lista
+            String DestinosEnString = "";
+            for(int i = 0; i < OR.getUsuariosDirigidos().size(); i++)
+            {DestinosEnString += OR.getUsuariosDirigidos().get(i)+" ";}
+            
+            //Se asigna string resultante
+            this.jTextField1.setText(DestinosEnString);
+        }
+        
+        else
+        {
+            int PublicacionCompApuntada = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaOr).getPublicacionCompartidaPorId(this.IdPreguntaSeleccionada);
+            PublicacionCompartida COMP = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaOr).getPublicacionesCompUsuario().get(PublicacionCompApuntada);
+            
+            //Realizar seteos de labels
+            
+            this.jLabel3.setText(Integer.toString(COMP.getIdPublicacion()));
+            this.jLabel5.setText(Integer.toString(COMP.getIdPublicacionCompartida()));
+            this.jLabel7.setText(COMP.getTipoPublicacion());
+            this.jLabel9.setText(COMP.getFechaPublicacion());
+            this.jLabel11.setText(COMP.getAutorPublicacion());
+            this.jTextArea1.setText(COMP.getContenidoPublicacion());
+            
+            //jTextField debe recibir string con destinatarios, no lista
+            String DestinosEnString = "";
+            for(int i = 0; i < COMP.getUsuariosDirigidos().size(); i++)
+            {DestinosEnString += COMP.getUsuariosDirigidos().get(i)+" ";}
+            
+            //Se asigna string resultante
+            this.jTextField1.setText(DestinosEnString);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

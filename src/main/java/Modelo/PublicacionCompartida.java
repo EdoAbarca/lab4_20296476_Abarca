@@ -45,6 +45,18 @@ public class PublicacionCompartida extends Publicacion
     
     /* GETTERS */
     
+    public int getIdPublicacionCompartida()
+    {return this.IdPublicacionCompartida;}
+    
+    public String getUsuarioComparteP()
+    {return this.UsuarioQueComparte;}
+    
+    public String getUsuarioRecibeP()
+    {return this.UsuarioDestinoComparte;}
+    
+    public String getFechaComparte()
+    {return this.FechaComparte;}
+    
     /**
      * Getter de indice comentario mediante ID reaccion
      * @param id ID comentario

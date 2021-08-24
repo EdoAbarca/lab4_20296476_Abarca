@@ -182,6 +182,8 @@ public class VentanaRegister extends javax.swing.JFrame {
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         this.jTextField1.setFocusable(true);
         this.jPasswordField1.setFocusable(false);
+        this.jButton2.setFocusable(false);
+        this.jButton1.setFocusable(false);
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
@@ -217,6 +219,8 @@ public class VentanaRegister extends javax.swing.JFrame {
     private void jPasswordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseClicked
         this.jTextField1.setFocusable(false);
         this.jPasswordField1.setFocusable(true);
+        this.jButton2.setFocusable(false);
+        this.jButton1.setFocusable(false);
     }//GEN-LAST:event_jPasswordField1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -5,14 +5,14 @@ import Modelo.ImplementacionRedSocial;
 import Vista.MuestraInicial;
 
 /*
-Laboratorio 4 Paradigmas de Programacio1n
-Objetivo: Implementar un programa que simule las funcionalidades de una red social, usando el Paradigma Orientado a Objetos y Paradigma Orientado a Eventos
+Laboratorio 4 Paradigmas de Programacion
+Objetivo: Implementar un programa que simule la interaccion y funcionalidades de una red social, usando el Paradigma Orientado a Objetos y Paradigma Orientado a Eventos
 Nombre Alumno: Eduardo Abarca
 Seccion: C-3
 Profesor: Daniel Gacitua
 Entrega: Original (23/08/2021)
 
-VERSION PRE-FINAL, REQUERIMIENTOS FUNCIONALES MINIMOS SE ESPERAN ESTAR FUNCIONALES.
+VERSION FINAL BETA, REVISANDO DETALLES...
 */
 
 /**
@@ -37,7 +37,7 @@ public class VentanaPrincipal
         */
                 
         //Instancia red social
-        ImplementacionRedSocial ModeloRedSocial = new ImplementacionRedSocial("Instabook");
+        ImplementacionRedSocial ModeloRedSocial = new ImplementacionRedSocial("Edu");
         
         //Instancia ventana principal
         MuestraInicial VentanaInicioRedSocial = new MuestraInicial(ModeloRedSocial);

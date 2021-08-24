@@ -31,6 +31,7 @@ public class SesionIniciada extends javax.swing.JFrame {
         this.jButton2.setFocusable(false);
         this.jButton3.setFocusable(false);
         jLabel3.setText(this.ReferenciaRedSocial.getUsuarioLogueado());
+        MostrarPreguntas();
     }
 
     /**
@@ -155,9 +156,9 @@ public class SesionIniciada extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(515, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(518, 518, 518))
+                .addGap(547, 547, 547))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jButton1)
@@ -213,6 +214,7 @@ public class SesionIniciada extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Boton Cerrar sesion
         // Llamar a metodo que cierra sesion
+        this.ReferenciaRedSocial.Logout();
         
         // Instanciar ventana de inicio, ventana a la que se regresa luego de cerrar sesion (para proteger metodos que necesitan sesion iniciada)
         MuestraInicial RegresoAInicio = new MuestraInicial(this.ReferenciaRedSocial);
@@ -288,7 +290,7 @@ public class SesionIniciada extends javax.swing.JFrame {
         {
             for(int j = 0; j < this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().size(); j++)
             {
-                //Se agrega a la tabla los datos de la pregunta referenciada
+                //Se agrega a la tabla los datos del post referenciado (Originaless)
                 tempRow[0] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().get(j).getIdPublicacion();
                 tempRow[1] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().get(j).getFechaPublicacion();
                 tempRow[2] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesOrUsuario().get(j).getAutorPublicacion();
@@ -297,7 +299,7 @@ public class SesionIniciada extends javax.swing.JFrame {
             }
             for(int k = 0; k < this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().size(); k++)
             {
-                //Se agrega a la tabla los datos de la pregunta referenciada
+                //Se agrega a la tabla los datos del post referenciado (Conpartidos)
                 tempRow[0] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().get(k).getIdPublicacion();
                 tempRow[1] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().get(k).getFechaPublicacion();
                 tempRow[2] = this.ReferenciaRedSocial.getUsuariosRegistrados().get(i).getPublicacionesCompUsuario().get(k).getAutorPublicacion();

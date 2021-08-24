@@ -2,6 +2,7 @@ package Vista;
 
 import Modelo.ImplementacionRedSocial;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -25,7 +26,11 @@ public class VentanaPost extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.jButton1.setFocusable(false);
+        this.jButton2.setFocusable(false);
+        this.jButton3.setFocusable(false);
+        this.jButton4.setFocusable(false);
         this.jButton2.setVisible(false);
+        InicializarJComboBox();
         MostrarContactosEnTabla();
     }
 
@@ -74,6 +79,11 @@ public class VentanaPost extends javax.swing.JFrame {
 
         jButton2.setText("Publicar");
         jButton2.setRequestFocusEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(133, 193, 233));
@@ -201,7 +211,7 @@ public class VentanaPost extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(219, 219, 219)
                                         .addComponent(jLabel7))
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -211,14 +221,15 @@ public class VentanaPost extends javax.swing.JFrame {
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(90, 90, 90)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(117, 117, 117)
-                                                .addComponent(jLabel8))))
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(jLabel8))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(90, 90, 90)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(528, 528, 528)
                         .addComponent(jLabel1)))
@@ -332,20 +343,21 @@ public class VentanaPost extends javax.swing.JFrame {
     
     // Borrar
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        //Se recupera el string almacenado en la ultima casilla, dividiendose este por los espacios entre etiquetas
-        String[] currentLabels = jTextField1.getText().split(" ");
-        String returnString = "";
         
-        //Se crea el string retorno, pero sin el ultimo elemento
-        for(int i = 0; i < currentLabels.length - 1; i++)
+        //Se recupera y divide el string que representa los destinos seleccionados hasta el momento de presionar el boton borrar
+        String[] DestinosSeleccionados = jTextField1.getText().split(" ");
+        String StringRetorno = ""; //String a guardar en JTextField
+        
+        //Se genera el string retorno, sin el ultimo elemento
+        for(int i = 0; i < DestinosSeleccionados.length - 1; i++)
         {
-            returnString+=currentLabels[i];
-            if(!(i+1 == currentLabels.length-1)) //Si no se ha llegado al penultimo elemento, se agrega un espacio entre etiquetas
-            {returnString+=" ";}
+            StringRetorno+=DestinosSeleccionados[i];
+            if(!(i+1 == DestinosSeleccionados.length-1)) //Si no se ha llegado al penultimo elemento, se agrega un espacio entre etiquetas
+            {StringRetorno+=" ";}
         }
         
         //Se asigna el string actualizado
-        jTextField1.setText(returnString);
+        jTextField1.setText(StringRetorno);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     //Se presiono un destino en la tabla
@@ -372,6 +384,34 @@ public class VentanaPost extends javax.swing.JFrame {
         {this.jButton2.setVisible(true);}
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
+    // Boton publicar, se debe llamar a requerimiento funcional Post
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Boton Iniciar sesion
+        // Obtener los datos ingresados en las casillas
+        String ContenidoPost = jTextArea1.getText();
+        String TipoPublicacion = jLabel7.getText();
+        
+        //Procesar arraylist post
+        String[] DestinosIngresados = jTextField1.getText().split(" ");
+        ArrayList<String> DestinosPost = new ArrayList<>();
+        DestinosPost.addAll(Arrays.asList(DestinosIngresados));
+        
+        // Llamar a metodo Login de la red social
+        String ResultadoPost = this.ReferenciaRedSocial.Post(TipoPublicacion, ContenidoPost, DestinosPost);
+        
+        // Mostrar resultado por pantalla
+        JOptionPane.showMessageDialog(this, ResultadoPost);
+            
+        // Instanciar la ventana de inicio
+        SesionIniciada VentanaConSesion = new SesionIniciada(this.ReferenciaRedSocial);
+            
+        // Finalizar muestreo ventana actual
+        this.setVisible(false);
+            
+        // Iniciar muestreo ventana inicio
+        VentanaConSesion.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
     //Metodo para rellenar elementos en tabla
     private void MostrarContactosEnTabla()
     {
@@ -381,7 +421,7 @@ public class VentanaPost extends javax.swing.JFrame {
         //Fila de elementos a asignar en la tabla
         Object tempRow[] = new Object[1];
         
-        //
+        //Se referencia de la lista de usuarios el indice del usuario logueado
         int IndiceUsuarioLogueado = this.ReferenciaRedSocial.getUsuarioViaUsername(this.ReferenciaRedSocial.getUsuarioLogueado());
         
         //Obtener contactos usuario logueado
@@ -403,6 +443,10 @@ public class VentanaPost extends javax.swing.JFrame {
         this.jComboBox1.addItem("URL");
         this.jComboBox1.addItem("Foto");
         this.jComboBox1.addItem("Video");
+        this.jComboBox1.removeItem("Item 1");
+        this.jComboBox1.removeItem("Item 2");
+        this.jComboBox1.removeItem("Item 3");
+        this.jComboBox1.removeItem("Item 4");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
