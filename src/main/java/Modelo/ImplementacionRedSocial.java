@@ -8,7 +8,7 @@ import java.util.Calendar;
  * Clase RedSocial. Esta clase tiene por objetivo representar una red social generica dentro del programa.
  * Aca se encontraran los atributos basicos de una red social y los metodos necesarios para poder interactuar en ella.
  * Requerimientos funcionales cubiertos en este archivo.
- * @version 1.3, 23/08/2021
+ * @version 1.4, 23/08/2021
  * @author Eduardo Abarca
  */
 public class ImplementacionRedSocial implements RedSocial
@@ -249,13 +249,6 @@ public class ImplementacionRedSocial implements RedSocial
         return IndiceUsuario;
     }
     
-    /**
-     * Metodo que retorna la cantidad de usuarios registrados
-     * @return Entero
-     */
-    @Override
-    public int CantidadUsuariosRegistrados()
-    {return this.ListaUsuarios.size();}
     
     /**
      * Metodo que busca al usuario logueado en el ArrayList de usuarios y revisa si los destinos ingresados por parametros estan en sus contactos
@@ -521,7 +514,7 @@ public class ImplementacionRedSocial implements RedSocial
                 }
                 else //No existe comentario con ese ID en la publicacion, se muestra mensaje por consola
                 {
-                    System.out.println("Error: No existe comentario con ese ID dentro de la publicacion seleccionada.\n");
+                    Resultado += "Error: No existe comentario con ese ID dentro de la publicacion seleccionada";
                 }
             }
         }
@@ -560,13 +553,13 @@ public class ImplementacionRedSocial implements RedSocial
                 }
                 else //No existe comentario con ese ID en la publicacion, se muestra mensaje por consola
                 {
-                    System.out.println("Error: No existe comentario con ese ID dentro de la publicacion seleccionada.\n");
+                    Resultado += "Error: No existe comentario con ese ID dentro de la publicacion seleccionada";
                 }
             }
         }
         // No existe publicacion con ese ID
         else
-        {System.out.println("Error: No existe publicacion con ese ID.\n");}
+        {Resultado += "Error: No existe publicacion con ese ID.";}
         
         //Retorno de string con resultado
         return Resultado;

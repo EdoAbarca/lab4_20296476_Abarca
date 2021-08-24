@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase Usuario. Esta clase tiene por objetivo representar un usuario en una red social.
  * 
- * @version 1.1, 23/08/2021
+ * @version 1.2, 23/08/2021
  * @author Eduardo Abarca
  */
 public class Usuario

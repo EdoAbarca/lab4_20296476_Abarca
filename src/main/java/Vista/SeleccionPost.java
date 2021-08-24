@@ -29,6 +29,8 @@ public class SeleccionPost extends javax.swing.JFrame
         this.setLocationRelativeTo(null);
         this.jButton2.setFocusable(false);
         this.jButton1.setFocusable(false);
+        this.jTextArea1.setFocusable(false);
+        this.jTextField1.setFocusable(false);
         RellenarDatosVentana();
     }
 
@@ -358,8 +360,8 @@ public class SeleccionPost extends javax.swing.JFrame
         
         else
         {
-            int PublicacionCompApuntada = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaOr).getPublicacionCompartidaPorId(this.IdPreguntaSeleccionada);
-            PublicacionCompartida COMP = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaOr).getPublicacionesCompUsuario().get(PublicacionCompApuntada);
+            int PublicacionCompApuntada = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaComp).getPublicacionCompartidaPorId(this.IdPreguntaSeleccionada);
+            PublicacionCompartida COMP = this.ReferenciaRedSocial.getUsuariosRegistrados().get(IndiceUsuarioPreguntaComp).getPublicacionesCompUsuario().get(PublicacionCompApuntada);
             
             //Realizar seteos de labels
             

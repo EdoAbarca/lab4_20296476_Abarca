@@ -12,7 +12,7 @@ Seccion: C-3
 Profesor: Daniel Gacitua
 Entrega: Original (23/08/2021)
 
-VERSION FINAL BETA, REVISANDO DETALLES...
+VERSION FINAL POSIBLEMENTE NO FINAL
 */
 
 /**

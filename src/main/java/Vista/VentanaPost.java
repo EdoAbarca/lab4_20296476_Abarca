@@ -2,7 +2,6 @@ package Vista;
 
 import Modelo.ImplementacionRedSocial;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -392,9 +391,15 @@ public class VentanaPost extends javax.swing.JFrame {
         String TipoPublicacion = jLabel7.getText();
         
         //Procesar arraylist post
-        String[] DestinosIngresados = jTextField1.getText().split(" ");
         ArrayList<String> DestinosPost = new ArrayList<>();
-        DestinosPost.addAll(Arrays.asList(DestinosIngresados));
+        String[] DestinosIngresados;
+        
+        if(!this.jTextField1.getText().equals(""))
+        {
+            DestinosIngresados = jTextField1.getText().split(" ");
+            for(int i = 0; i < DestinosIngresados.length; i++)
+            {DestinosPost.add(DestinosIngresados[i]);}
+        }
         
         // Llamar a metodo Login de la red social
         String ResultadoPost = this.ReferenciaRedSocial.Post(TipoPublicacion, ContenidoPost, DestinosPost);

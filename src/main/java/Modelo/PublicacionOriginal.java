@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase PubicacionOriginal. Esta clase tiene por objetivo representar una publicacion original (no compartida) en una red social.
  * Clase hija de "Publicacion"
- * @version 1.0, 21/08/2021
+ * @version 1.1, 23/08/2021
  * @author Eduardo Abarca
  */
 public class PublicacionOriginal extends Publicacion
@@ -60,8 +60,6 @@ public class PublicacionOriginal extends Publicacion
         return IndiceComentario;
     }
     
-    public ArrayList<Comentario> getComentariosPublicacion()
-    {return this.ComentariosPublicacionOr;}
     
     /* SETTERS */
     // Sin setters.

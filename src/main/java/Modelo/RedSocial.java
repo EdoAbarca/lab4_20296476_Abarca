@@ -36,8 +36,6 @@ public interface RedSocial
     
     public int ReferenciarUsuarioPublicacionComp(int id);
     
-    public int CantidadUsuariosRegistrados();
-    
     public boolean ValidarDestinos(ArrayList<String> ListaDestinos);
     
     /* /////////////////////////////////////////// REQUERIMIENTOS FUNCIONALES /////////////////////////////////////////// */

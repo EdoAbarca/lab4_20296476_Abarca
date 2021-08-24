@@ -262,11 +262,16 @@ public class VentanaShare extends javax.swing.JFrame {
     //Boton compartir
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        //Se genera arraylist de destinos seleccionados
+        //Procesar arraylist post
         ArrayList<String> DestinosShare = new ArrayList<>();
-        String[] DestinosIngresados = this.jTextField1.getText().split(" ");
-        for(int i = 0; i < DestinosIngresados.length; i++)
-        {DestinosShare.add(DestinosIngresados[i]);}
+        String[] DestinosIngresados;
+        
+        if(!this.jTextField1.getText().equals(""))
+        {
+            DestinosIngresados = jTextField1.getText().split(" ");
+            for(int i = 0; i < DestinosIngresados.length; i++)
+            {DestinosShare.add(DestinosIngresados[i]);}
+        }
 
         // Se llama a RF Share, con los datos ingresados por los campos de la ventana
         String Resultado = this.ReferenciaRedSocial.Share(Integer.parseInt(this.jLabel3.getText()), DestinosShare);

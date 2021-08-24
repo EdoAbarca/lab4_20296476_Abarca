@@ -15,7 +15,7 @@ public class VentanaRegister extends javax.swing.JFrame {
      * Creates new form VentanaRegister
      * @param RS
      */
-    public VentanaRegister(ImplementacionRedSocial RS) 
+    public VentanaRegister(ImplementacionRedSocial RS)
     {
         this.ReferenciaRedSocial = RS;
         initComponents();
